@@ -8,6 +8,7 @@
   <script>
     $(function(){
       $(':input[placeholder]').placeholder();
+//      $('.floatLeft, textarea[placeholder]').placeholder();
     });
   </script>
   <style>
@@ -61,6 +62,18 @@
     <label>
       <input class="floatRight" type="text" id="floatRight" name="floatRight" placeholder="Sample Text">
       Floated Right:
+    </label>
+  </div>
+  <div>
+    <label>
+      Text Area:
+      <textarea name="textarea" rows="8" cols="40" placeholder="Sample Text"></textarea>
+    </label>
+  </div>
+  <div>
+    <label>
+      With Padding:
+      <input type="text" name="padded" value="" id="padded" placeholder="Sample Text" style="padding: 10px;">
     </label>
   </div>
   <input type="submit">
