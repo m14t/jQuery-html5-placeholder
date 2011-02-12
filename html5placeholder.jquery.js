@@ -37,22 +37,24 @@
 
             //local vars
             var $this = $(this),
-                    inputVal = $.trim($this.val()),
-                    inputWidth = $this.width(),
-                    inputOuterWidth = $this.outerWidth(),
-                    inputOuterHeight = $this.outerHeight(),
-                    inputFloat = $this.css('float'),
-                    guessingLineHeight = false,
-                    inputLineHeight = parseInt($this.css('lineHeight'), 10),
-                    numberOfLines,
+                $wrapper = $this.parent(),
+                inputVal = $.trim($this.val()),
+                inputWidth = $this.width(),
+                inputOuterWidth = $this.outerWidth(),
+                inputOuterHeight = $this.outerHeight(),
+                inputFloat = $this.css('float'),
+                guessingLineHeight = false,
+                inputLineHeight = parseInt($this.css('lineHeight'), 10),
+                numberOfLines,
+                topOffset = ($this.offset().top - $wrapper.offset().top),
 
-                    //grab the inputs id for the <label @for>, or make a new one from the Date
-                    inputId = (this.id) ? this.id : 'placeholder' + (+new Date()),
-                    placeholderText = $this.attr('placeholder'),
-                    placeholder = $('<label for=' + inputId + '>' + placeholderText + '</label>');
+                //grab the inputs id for the <label @for>, or make a new one from the Date
+                inputId = (this.id) ? this.id : 'placeholder' + (+new Date()),
+                placeholderText = $this.attr('placeholder'),
+                placeholder = $('<label for=' + inputId + '>' + placeholderText + '</label>');
 
             padding = {
-                t: parseInt($this.css('paddingTop'), 10),
+                t: parseInt($this.css('paddingTop'), 10) + topOffset,
                 r: parseInt($this.css('paddingRight'), 10),
                 b: parseInt($this.css('paddingBottom'), 10),
                 l: parseInt($this.css('paddingLeft'), 10)
@@ -76,7 +78,7 @@
             setPaddingMax('paddingLeft', 'l');
 
             options.placeholderCSS.width = inputOuterWidth - options.placeholderCSS.paddingLeft - options.placeholderCSS.paddingRight;
-            options.placeholderCSS.height = inputOuterHeight - options.placeholderCSS.paddingTop - options.placeholderCSS.paddingBottom;
+            options.placeholderCSS.height = inputOuterHeight - options.placeholderCSS.paddingTop - options.placeholderCSS.paddingBottom + topOffset;
             if (!(guessingLineHeight && "TEXTAREA" === this.tagName)) {
                 //-- if we don't really know the lineHeight, so lets let it inherit
                 options.placeholderCSS.lineHeight = (inputOuterHeight / numberOfLines) + 'px';
@@ -120,6 +122,7 @@
             left: '0px',
             top: '0px',
             paddingLeft: '5px',
+            textAlign: 'left',
             overflow: 'hidden'
         }
     };
